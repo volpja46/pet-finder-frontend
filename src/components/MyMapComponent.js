@@ -3,7 +3,7 @@ import { compose, withProps } from "recompose"
 import CSS from '../App.css'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer"
-// import MyModal from './MyModal'
+import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 

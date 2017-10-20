@@ -1,28 +1,39 @@
 import React from 'react'
-import { Button, Header, Image, Modal, Form, Checkbox } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Form, Checkbox, Icon} from 'semantic-ui-react'
 
 const LostPetModal = () => (
-  <Modal trigger={<Button>Report a lost pet</Button>}>
-
-    <Modal.Header>Report a lost pet</Modal.Header>
+  <Modal trigger={<Button color="dark grey" class="ui toggle button">Report a lost pet</Button>} closeIcon>
+  <Header icon='paw' align="center" content='Report a lost pet!' />
     <Modal.Content image>
-      <Image wrapped size='medium' src='/assets/images/avatar/large/rachel.png' />
+      <Image wrapped size='tiny' src='/assets/images/avatar/large/rachel.png' />
       <Modal.Description>
-        <Form>
+      <Form size='small' key='small'>
+    <div class="ui two column centered grid">
     <Form.Field>
-      <label>Name:</label>
       <input placeholder='Name' />
     </Form.Field>
+  </div>
+  <div class="ui two column centered grid">
     <Form.Field>
-      <label>Address</label>
+      <input placeholder='Pet type' />
+    </Form.Field>
+    </div>
+    <div class="ui two column centered grid">
+    <Form.Field>
       <input placeholder='Address' />
     </Form.Field>
+  </div>
+  <div class="ui two column centered grid">
     <Form.Field>
-      <label>Upload a photo</label>
       <input placeholder='Upload a photo' />
     </Form.Field>
-    <Button type='submit'>Submit</Button>
-  </Form>
+  </div>
+  <div class="ui two column centered grid">
+    <Button color='purple'>
+      <Icon name='paw' /> Submit
+    </Button>
+  </div>
+    </Form>
       </Modal.Description>
     </Modal.Content>
   </Modal>
