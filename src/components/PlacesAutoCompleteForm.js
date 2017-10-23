@@ -1,35 +1,39 @@
-// import React from 'react'
-// import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-//
-// class PlacesAutoCompleteForm extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = { address: 'San Francisco, CA' }
-//     this.onChange = (address) => this.setState({ address })
-//   }
-//
-//   handleFormSubmit = (event) => {
-//     event.preventDefault()
-//
-//     geocodeByAddress(this.state.address)
-//       .then(results => getLatLng(results[0]))
-//       .then(latLng => console.log('Success', latLng))
-//       .catch(error => console.error('Error', error))
-//   }
-//
-//   render() {
-//     const inputProps = {
-//       value: this.state.address,
-//       onChange: this.onChange,
-//     }
-//
-//     return (
-//       <form onSubmit={this.handleFormSubmit}>
-//         <PlacesAutocomplete inputProps={inputProps} />
-//         <button type="submit">Submit</button>
-//       </form>
-//     )
-//   }
-// }
-//
-// export default PlacesAutoCompleteForm;
+import React from 'react'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
+import {Button, Icon} from 'semantic-ui-react'
+
+class PlacesAutoCompleteForm extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+    address: 'San Francisco, CA',
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAgTysbRxFdqJG_HFkbJRx5VJWLFmOQwWc&libraries=places",
+  }
+    this.onChange = (address) => this.setState({ address })
+  }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+
+    geocodeByAddress(this.state.address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.props.handleLatLng(latLng))
+  }
+
+  render() {
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    }
+
+    return (
+      <form onChange={this.handleFormSubmit}>
+        <PlacesAutocomplete inputProps={inputProps} />
+      </form>
+    )
+  }
+}
+
+export default PlacesAutoCompleteForm;

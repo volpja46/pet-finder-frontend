@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Header, Image, Modal, Form, Checkbox, Icon} from 'semantic-ui-react'
+import PlacesAutoCompleteForm from './PlacesAutoCompleteForm'
 
 class FoundPetModal extends React.Component {
   constructor (){

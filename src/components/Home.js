@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Link, Route } from 'react-router-dom';
 import LostPetModal from './LostPetModal'
 import FoundPetModal from './FoundPetModal'
+import PlacesAutoCompleteForm from './PlacesAutoCompleteForm'
 
 export default class Home extends React.Component {
 	render() {
@@ -17,7 +18,3 @@ export default class Home extends React.Component {
 		);
 	}
 }
-
-//
-// <center>
-//   <img src={require(`../Images/beer.jpeg`)} alt="beer" />

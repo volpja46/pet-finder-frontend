@@ -11,7 +11,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Route exact path="/home" component={Home}/>
+        <Route exact path="/" component={Home}/>
         <MyFancyComponent/>
       </div>
     );
