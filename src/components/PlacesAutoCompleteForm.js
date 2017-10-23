@@ -1,6 +1,5 @@
 import React from 'react'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import {Button, Icon} from 'semantic-ui-react'
 
 class PlacesAutoCompleteForm extends React.Component {
@@ -29,7 +28,7 @@ class PlacesAutoCompleteForm extends React.Component {
     }
 
     return (
-      <form onChange={this.handleFormSubmit}>
+      <form onBlur={this.handleFormSubmit} >
         <PlacesAutocomplete inputProps={inputProps} />
       </form>
     )

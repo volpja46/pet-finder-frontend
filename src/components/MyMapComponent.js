@@ -1,60 +1,86 @@
-import React from "react"
-import { compose, withProps } from "recompose"
-import CSS from '../App.css'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
-import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer"
-import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+import {Icon} from 'semantic-ui-react'
 
+const AnyReactComponent = ({ text }) => (
+  <Icon name='circle' color='red' size="large" />
+);
 
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `300px`, width: `500px`}} />,
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  withScriptjs,
-  withGoogleMap
-)((props) =>
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: 40.70, lng: -74.01 }}
-  >
-    {props.isMarkerShown && <Marker key={1} position={{ lat: 40.70, lng: -74.01 }} onClick={props.onMarkerClick(this)} />}
-    {props.isMarkerShown && <Marker key={2} position={{ lat: 40.90, lng: -74.01 }} onClick={props.onMarkerClick(this)} />}
-  </GoogleMap>
-)
+let divStyle = {
+  border: '5px solid #f44336',
+  minWidth: "175px",
+  backgroundColor: 'white',
+  textAlign: 'center',
+  color: 'black',
+  fontSize: 16,
+  fontWeight: 'bold',
+  padding: 4,
+  cursor: 'pointer'
+}
 
-export class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
+const InfoBox = (props) => (
+  <div style={divStyle}>
+  <p>{props.pet.name}</p>
+  <p>{props.pet.lost_or_found}</p>
+  <p>{props.pet.contact}</p>
+  <p>{props.pet.animal_type}</p>
+  <p>{props.pet.comment}</p>
+  </div>
+
+);
+
+export default class SimpleMap extends React.Component {
+  constructor(){
+    super()
+    this.childMouseEnter = this.childMouseEnter.bind(this)
+    this.state = {
+      allPets: [],
+      lat: "",
+      lng: "",
+      infoBox: false
+    }
   }
 
+  componentWillMount(){
+    fetch('http://localhost:3000/pets')
+      .then(res => res.json())
+      .then(res => this.setState({
+        allPets: res
+      }))
 
-  componentDidMount() {
-    this.delayedShowMarker()
   }
 
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 3000)
-  }
+  static defaultProps = {
+    center: {lat: 40.7128, lng: -74.0060},
+    zoom: 11
+  };
 
-  handleMarkerClick = () => {
+  childMouseEnter(num, childProps){
+    this.setState({
+      lat: childProps.lat,
+      lng: childProps.lng,
+      infoBox: true,
+      pet: childProps.pet
+    })
 
   }
 
   render() {
     return (
-      <div>
-        <br/>
-      <MyMapComponent
-        isMarkerShown={this.state.isMarkerShown}
-        onMarkerClick={this.handleMarkerClick}
-      />
-    </div>
-    )
+       <GoogleMapReact
+        defaultCenter={this.props.center}
+        defaultZoom={this.props.zoom}
+        onChildMouseEnter={this.childMouseEnter}
+      >
+      {this.state.allPets.map(pet =>
+        <AnyReactComponent
+          key={pet.id}
+          lat={pet.lat}
+          lng={pet.lng}
+          pet = {pet}
+        /> )}
+        {this.state.infoBox ? <InfoBox lat={this.state.lat} lng={this.state.lng} pet={this.state.pet}/> : console.log("noninfnobox")}
+      </GoogleMapReact>
+    );
   }
 }

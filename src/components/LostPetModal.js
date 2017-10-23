@@ -57,6 +57,7 @@ class LostPetModal extends React.Component {
   }
 
   handleLatLng = (latlng) => {
+    console.log(latlng)
     this.setState({
       lat: latlng.lat,
       lng: latlng.lng

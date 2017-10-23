@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Home from './components/Home'
 import { Link, Route } from 'react-router-dom'
-import {MyFancyComponent} from './components/MyMapComponent'
+
 
 
 class App extends Component {
@@ -12,7 +12,6 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path="/" component={Home}/>
-        <MyFancyComponent/>
       </div>
     );
   }
