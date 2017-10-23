@@ -8,7 +8,7 @@ const AnyReactComponent = ({ text }) => (
 
 let divStyle = {
   border: '5px solid #f44336',
-  minWidth: "175px",
+  minWidth: "170px",
   backgroundColor: 'white',
   textAlign: 'center',
   color: 'black',
@@ -33,6 +33,7 @@ export default class SimpleMap extends React.Component {
   constructor(){
     super()
     this.childMouseEnter = this.childMouseEnter.bind(this)
+    this.childMouseLeave = this.childMouseLeave.bind(this)
     this.state = {
       allPets: [],
       lat: "",
@@ -62,7 +63,12 @@ export default class SimpleMap extends React.Component {
       infoBox: true,
       pet: childProps.pet
     })
+  }
 
+  childMouseLeave(num, childProps){
+    this.setState({
+      infoBox: false
+    })
   }
 
   render() {
@@ -71,6 +77,7 @@ export default class SimpleMap extends React.Component {
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
         onChildMouseEnter={this.childMouseEnter}
+        onChildMouseLeave={this.childMouseLeave}
       >
       {this.state.allPets.map(pet =>
         <AnyReactComponent
