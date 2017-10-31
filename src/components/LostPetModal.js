@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Image, Modal, Form, Checkbox, Icon} from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Form, Checkbox, Icon, Grid} from 'semantic-ui-react'
 import PlacesAutoCompleteForm from './PlacesAutoCompleteForm'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
@@ -94,62 +94,61 @@ class LostPetModal extends React.Component {
   render() {
     return(
       <Modal trigger={<Button color="grey">Report a lost pet</Button>} closeIcon>
-      <Header icon='paw' align="center" content='Report a lost pet!' />
-        <Modal.Content image>
-          <Image wrapped size='tiny' src='/assets/images/avatar/large/rachel.png' />
-          <Modal.Description>
-        <Form
-        size='small' key='small'
-        onSubmit={this.handleSubmit}
-        >
-        <div className="ui two column centered grid">
-        <Form.Field>
-          <input
-            placeholder='Name'
-            onChange={this.handleNameChange}
-             />
-        </Form.Field>
-      </div>
-      <div className="ui two column centered grid">
-        <Form.Field>
-          <input
-            placeholder='Pet type'
-            onChange={this.handlePetTypeChange}/>
-        </Form.Field>
-        </div>
-      <div className="ui two column centered grid">
-        <Form.Field>
-          <input
-            placeholder='Upload a photo'
-            onChange={this.handlePhotoChange}
-            />
-        </Form.Field>
-        <Form.Field>
-          <input
-            placeholder='Comment'
-            onChange={this.handleCommentChange} />
-        </Form.Field>
-        <Form.Field>
-          <input
-            placeholder='Contact'
-            onChange={this.handleContactChange} />
-        </Form.Field>
-        <Form.Field>
-          <PlacesAutoCompleteForm handleLatLng={this.handleLatLng}/>
-        </Form.Field>
-      </div>
-      <Button color='purple'>
-        <Icon name='paw' /> Submit
-      </Button>
-      <div className="ui two column centered grid">
-
-    </div>
-
-        </Form>
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
-    )
+      <Header icon='paw' align="center" size="large" content='Report a lost pet!' />
+        <Modal.Content>
+        <Grid columns={2} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <Form
+              size='large' key='large'
+              onSubmit={this.handleSubmit}
+              >
+                <Form.Field>
+                  <input
+                    placeholder='Name'
+                    onChange={this.handleNameChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <input
+                    placeholder='Pet type'
+                    onChange={this.handlePetTypeChange}/>
+                </Form.Field>
+                <Form.Field>
+                  <input
+                    placeholder='Upload a photo'
+                    onChange={this.handlePhotoChange}
+                    />
+                </Form.Field>
+                <Form.Field>
+                  <input
+                    placeholder='Comment'
+                    onChange={this.handleCommentChange} />
+                </Form.Field>
+                <Form.Field>
+                  <input
+                    placeholder='Contact'
+                    onChange={this.handleContactChange} />
+                </Form.Field>
+                <Form.Field>
+                  <PlacesAutoCompleteForm handleLatLng={this.handleLatLng}/>
+                </Form.Field>
+                <Form.Field>
+                  <Button color='violet'>
+                    <Icon name='paw' /> Submit
+                  </Button>
+                </Form.Field>
+              </Form>
+            </Grid.Column>
+            <Grid.Column>
+              <img src="https://static.pexels.com/photos/460823/pexels-photo-460823.jpeg"></img>
+              <p>"Help me find my poor old Baxter Puppington." -Kevin Yonzon</p>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+    </Modal.Content>
+  </Modal>
+  )
   }
 }
 

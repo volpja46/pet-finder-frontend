@@ -3,27 +3,26 @@ import GoogleMapReact from 'google-map-react';
 import {Icon} from 'semantic-ui-react'
 
 const AnyReactComponent = ({ text }) => (
-  <Icon name='circle' color='red' size="large" />
+  <Icon name='circle' color='violet' size="large" />
 );
 
 let divStyle = {
-  border: '5px solid #f44336',
+  border: '3px solid #7e20db',
   minWidth: "170px",
   backgroundColor: 'white',
-  textAlign: 'center',
   color: 'black',
-  fontSize: 16,
-  fontWeight: 'bold',
+  fontSize: 13,
   padding: 4,
-  cursor: 'pointer'
+  cursor: 'pointer',
+  borderRadius: '10%'
 }
 
 const InfoBox = (props) => (
   <div style={divStyle}>
-  <p>{props.pet.name}</p>
-  <p>{props.pet.lost_or_found}</p>
-  <p>{props.pet.contact}</p>
-  <p>{props.pet.animal_type}</p>
+  <p><b>Name:</b> {props.pet.name}</p>
+  <p><b>Status:</b> {props.pet.lost_or_found}</p>
+  <p><b>Contact:</b> {props.pet.contact}</p>
+  <p><b>Animal type:</b> {props.pet.animal_type}</p>
   <p>{props.pet.comment}</p>
   </div>
 
@@ -52,7 +51,7 @@ export default class SimpleMap extends React.Component {
   }
 
   static defaultProps = {
-    center: {lat: 40.7128, lng: -74.0060},
+    center: {lat: 40, lng: 40},
     zoom: 11
   };
 
@@ -74,7 +73,7 @@ export default class SimpleMap extends React.Component {
   render() {
     return (
        <GoogleMapReact
-        defaultCenter={this.props.center}
+        center={{lat: this.props.searchLat, lng: this.props.searchLng}}
         defaultZoom={this.props.zoom}
         onChildMouseEnter={this.childMouseEnter}
         onChildMouseLeave={this.childMouseLeave}

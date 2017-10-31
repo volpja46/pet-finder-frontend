@@ -7,7 +7,7 @@ class PlacesAutoCompleteForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-    address: 'San Francisco, CA',
+    address: '',
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAgTysbRxFdqJG_HFkbJRx5VJWLFmOQwWc&libraries=places",
   }
     this.onChange = (address) => this.setState({ address })
@@ -24,6 +24,7 @@ class PlacesAutoCompleteForm extends React.Component {
   render() {
     const inputProps = {
       value: this.state.address,
+      placeholder: 'Enter location',
       onChange: this.onChange,
     }
 
